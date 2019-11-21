@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'ParimatchBold';
+    src: url('fonts/ParimatchBold.eot');
+    src: url('fonts/ParimatchBold.eot') format('embedded-opentype'),
+         url('fonts/ParimatchBold.woff2') format('woff2'),
+         url('fonts/ParimatchBold.woff') format('woff'),
+         url('fonts/ParimatchBold.ttf') format('truetype'),
+         url('fonts/ParimatchBold.svg#ParimatchBold') format('svg');
+}

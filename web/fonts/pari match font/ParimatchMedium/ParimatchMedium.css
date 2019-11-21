@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'ParimatchMedium';
+    src: url('fonts/ParimatchMedium.eot');
+    src: url('fonts/ParimatchMedium.eot') format('embedded-opentype'),
+         url('fonts/ParimatchMedium.woff2') format('woff2'),
+         url('fonts/ParimatchMedium.woff') format('woff'),
+         url('fonts/ParimatchMedium.ttf') format('truetype'),
+         url('fonts/ParimatchMedium.svg#ParimatchMedium') format('svg');
+}

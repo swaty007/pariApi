@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'ParimatchRegular';
+    src: url('fonts/ParimatchRegular.eot');
+    src: url('fonts/ParimatchRegular.eot') format('embedded-opentype'),
+         url('fonts/ParimatchRegular.woff2') format('woff2'),
+         url('fonts/ParimatchRegular.woff') format('woff'),
+         url('fonts/ParimatchRegular.ttf') format('truetype'),
+         url('fonts/ParimatchRegular.svg#ParimatchRegular') format('svg');
+}

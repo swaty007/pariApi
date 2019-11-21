@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'ParimatchThin';
+    src: url('fonts/ParimatchThin.eot');
+    src: url('fonts/ParimatchThin.eot') format('embedded-opentype'),
+         url('fonts/ParimatchThin.woff2') format('woff2'),
+         url('fonts/ParimatchThin.woff') format('woff'),
+         url('fonts/ParimatchThin.ttf') format('truetype'),
+         url('fonts/ParimatchThin.svg#ParimatchThin') format('svg');
+}

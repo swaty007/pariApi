@@ -1,0 +1,32 @@
+$lg-width: 1199px;
+$md-width: 991px;
+$sm-width: 767px;
+
+@mixin adaptive($size) {
+  @if $size == lg {
+    @media (max-width: $lg-width) {
+      @content
+    }
+  } @else if $size == md {
+    @media only screen and (max-width: $md-width) {
+      @content
+    }
+  }  @else if $size == sm {
+    @media only screen and (max-width: $sm-width) {
+      @content
+    }
+  }
+}
+
+
+@include adaptive(lg) {
+
+}
+
+@include adaptive(md) {
+
+}
+
+@include adaptive(sm) {
+
+}

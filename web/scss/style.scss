@@ -1,0 +1,28 @@
+/*
+ Theme Name: Car UA
+ Author: Andrey Zdrobilko
+ Version: 1.0
+*/
+
+//@import "libs";
+
+/* Utils */
+@import "utils/variables";
+//@import "utils/mixins";
+@import "utils/grid";
+@import "utils/fonts";
+
+/* Base */
+@import "base/grid";
+@import "base/base";
+//@import "base/globals";
+
+/* Components */
+//@import "components/alert";
+
+/* Icludes */
+@import "includes/footer.scss";
+@import "includes/header.scss";
+
+/* Sections */
+@import "sections/pari-match";
