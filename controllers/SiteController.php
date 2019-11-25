@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\PariMatch;
 
 class SiteController extends Controller
 {
@@ -69,6 +70,8 @@ class SiteController extends Controller
             Yii::$app->response->format = 'json';
             $amount = (double)Yii::$app->request->post('value1', '');
 
+
+            $pm = new PariMatch();
 
             if ($answer['result'] == 'ok') {
                 return [

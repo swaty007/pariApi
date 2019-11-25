@@ -49,7 +49,13 @@ AppAsset::register($this);
                 Enter your phone number.
                 Enter the verification code that you received via SMS.
             </p>
-            <input type="text" class="pari-match__input">
+
+            <div class="input">
+                <div class="input__close">
+                    <?= Html::img('@web/img/logo_on_black.svg', ['class' => 'input__close--img']); ?>
+                </div>
+                <input type="text" class="input__el">
+            </div>
         </div>
     </div>
 </section>
