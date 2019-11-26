@@ -23,7 +23,8 @@
     background-color: $background-black;
     justify-content: flex-end;
     padding-bottom: 80px;
-    @media(max-width: $md-width) {
+
+    @media(min-width: 992px) {
       position: relative;
     }
     &--background {
