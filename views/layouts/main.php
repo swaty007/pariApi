@@ -51,8 +51,9 @@ AppAsset::register($this);
             </p>
 
             <div class="input">
-                <div class="input__close">
-                    <?= Html::img('@web/img/logo_on_black.svg', ['class' => 'input__close--img']); ?>
+                <div class="input__status">
+                    <?= Html::img('@web/img/icon_close.svg', ['class' => 'input__status--img']); ?>
+                    <?= Html::img('@web/img/icon_ok.svg', ['class' => 'input__status--img']); ?>
                 </div>
                 <input type="text" class="input__el">
             </div>

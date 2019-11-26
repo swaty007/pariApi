@@ -1,18 +1,28 @@
 .input {
   position: relative;
-  &__close {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  &__status {
     position: absolute;
-    right: 0;
+    right: 25px;
     z-index: 42;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &--img {
+
+    }
   }
   &__el {
     z-index: 40;
     border: 1px solid $black;
     border-radius: 6px;
     line-height: 56px;
-    padding: 0;
+    padding: 0 70px 0 50px;
     appearance: none;
     outline: none;
+    width: 100%;
     &::placeholder {
       color: fade_out($black, 0.5);
     }

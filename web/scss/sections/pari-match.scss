@@ -1,26 +1,38 @@
 .pari-match {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  min-height: 100vh;
   align-items: stretch;
   justify-content: space-evenly;
+  @media(max-width: $md-width) {
+    justify-content: space-evenly;
+    background-color: $black;
+    flex-direction: column;
+    align-items: center;
+  }
   &__left, &__right {
-    position: relative;
     display: flex;
     flex-direction: column;
     width: 50%;
     padding: 0 80px;
+    @media(max-width: $md-width) {
+      width: 100%;
+    }
   }
   &__left {
     background-color: $background-black;
     justify-content: flex-end;
     padding-bottom: 80px;
+    @media(max-width: $md-width) {
+      position: relative;
+    }
     &--background {
       position: absolute;
       left:0;
       bottom: 0;
       width: 100%;
       z-index: 2;
+      height: 70%;
     }
     &--img {
       position: absolute;
@@ -33,6 +45,11 @@
   &__right {
     background-color: $white;
     justify-content: center;
+    position: relative;
+    @media(max-width: $md-width) {
+      position: relative;
+      color: $black;
+    }
   }
   &--main-text {
     font-family: 'Circle';
@@ -43,6 +60,14 @@
     text-transform: uppercase;
     color: $white;
     z-index: 420;
+    @media(max-width:$lg-width) {
+      font-size: 28px;
+      line-height: 38px;
+    }
+    @media(max-width:$sm-width) {
+      font-size: 12px;
+      line-height: 18px;
+    }
   }
   &__title {
     font-family: 'ParimatchBold';
@@ -53,10 +78,20 @@
     text-transform: uppercase;
     width: 100%;
 
+    white-space: nowrap;
+
     color: $yellow;
 
     text-shadow: 0px 0px 12px rgba(248, 255, 19, 0.35);
     z-index: 420;
+    @media(max-width:$lg-width) {
+      font-size: 62px;
+      line-height: 72px;
+    }
+    @media(max-width:$sm-width) {
+      font-size: 40px;
+      line-height: 48px;
+    }
     &--left {
       text-align: left;
     }
@@ -71,6 +106,9 @@
     transform: translateX(-50%);
   }
   &__form {
+    @media(max-width: $md-width) {
+
+    }
     &--text {
       font-family: 'Circle';
       font-style: normal;
@@ -80,6 +118,9 @@
       text-align: center;
 
       color: $black;
+      @media(max-width: $md-width) {
+        color: $white;
+      }
     }
   }
 }
