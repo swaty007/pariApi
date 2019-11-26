@@ -56,6 +56,16 @@ AppAsset::register($this);
                 </div>
                 <input type="text" class="input__el">
             </div>
+
+
+<!--            <form method="post" action="https://parimatch.co.tz/rest/customer/session/login" enctype="multipart/form-data">-->
+<!--                <input type="hidden" name="login"  value="123223121"/>-->
+<!--                <input type="hidden" name="password" value="qwerty123"/>-->
+<!---->
+<!--                <input type="submit" value="login" />-->
+<!--            </form>-->
+
+
         </div>
     </div>
 </section>

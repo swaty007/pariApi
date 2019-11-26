@@ -64,86 +64,54 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-    public function actionPhone() {
+
+
+    public function actionRegister() {
         Yii::$app->controller->enableCsrfValidation = false;
-        if (Yii::$app->request->isAjax) {
+//        if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
-            $amount = (double)Yii::$app->request->post('value1', '');
+//            $amount = (double)Yii::$app->request->post('value1', '');
 
-
+        $ref = (double)Yii::$app->request->post('ref', '');
+        $number = (double)Yii::$app->request->post('number', '');
+        $ref = null;
+        $number = 255111212111;
             $pm = new PariMatch();
+            $res = $pm->createRegister($ref, $number);
+            var_dump($res['data']['userId']);die();
 
-            if ($answer['result'] == 'ok') {
-                return [
-                    'msg' => 'ok',
-                    'status'=>'Транзакция создана успешно',
-                    'result'=>$answer,
-                    'transaction' => $transaction
-                ];
-            } else {
-                return ['msg' => 'error','status'=>$answer];
-            }
-        }
+//            if ($answer['result'] == 'ok') {
+//                return [
+//                    'msg' => 'ok',
+//                    'status'=>'Транзакция создана успешно',
+//                    'result'=>$answer,
+//                    'transaction' => $transaction
+//                ];
+//            } else {
+//                return ['msg' => 'error','status'=>$answer];
+//            }
+//        }
     }
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    public function actionCheck () {
+        Yii::$app->controller->enableCsrfValidation = false;
+        Yii::$app->response->format = 'json';
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        $code = "tuohyzxljb";
+        $user_id = 194124;
+        $pm = new PariMatch();
+        $res = $pm->checkCode($code,$user_id);
+        var_dump($res->data->userId);die();
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
 
-        return $this->goHome();
-    }
+    public function actionLogin () {
+        Yii::$app->controller->enableCsrfValidation = false;
+        Yii::$app->response->format = 'json';
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        $number = 123223121;
+        $password = "qwerty123";
+        $pm = new PariMatch();
+        $res = $pm->login($number, $password);
+        var_dump($res);die();
     }
 }
