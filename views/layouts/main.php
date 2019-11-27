@@ -44,30 +44,46 @@ AppAsset::register($this);
     <div class="pari-match__right">
         <?= Html::img('@web/img/logo_on_black.svg', ['class' => 'pari-match__logo']); ?>
 
-        <div class="pari-match__form">
-            <p class="pari-match__form--text">
-                Enter your phone number.
-                Enter the verification code that you received via SMS.
-            </p>
-
-            <div class="input">
-                <div class="input__status">
-                    <?= Html::img('@web/img/icon_close.svg', ['class' => 'input__status--img']); ?>
-                    <?= Html::img('@web/img/icon_ok.svg', ['class' => 'input__status--img']); ?>
+        <div class="pari-match__form__wrap">
+            <div class="pari-match__form pari-match__form--number pari-match__form--active">
+                <p class="pari-match__form--text">
+                    Enter your phone number.
+                </p>
+                <div class="input">
+                    <div class="input__status"></div>
+                    <input id="number_mask" type="tel" class="input__el input__el--tel">
+                    <p class="input__error">
+                        You entered an verification code.
+                    </p>
                 </div>
-                <input type="text" class="input__el">
+
+                <button id="number_send" class="pari-btn">NEXT</button>
+
+                <!--            <form method="post" action="https://parimatch.co.tz/rest/customer/session/login" enctype="multipart/form-data">-->
+                <!--                <input type="hidden" name="login"  value="123223121"/>-->
+                <!--                <input type="hidden" name="password" value="qwerty123"/>-->
+                <!---->
+                <!--                <input type="submit" value="login" />-->
+                <!--            </form>-->
+
             </div>
+            <div class="pari-match__form pari-match__form--code">
+                <p class="pari-match__form--text">
+                    Enter the verification code that you received via SMS.
+                </p>
+                <div class="input">
+                    <div class="input__status"></div>
+                    <input id="code_mask" type="text" class="input__el input__el--code">
+                    <p class="input__error">
+                        You entered an verification code.
+                    </p>
+                </div>
 
-
-<!--            <form method="post" action="https://parimatch.co.tz/rest/customer/session/login" enctype="multipart/form-data">-->
-<!--                <input type="hidden" name="login"  value="123223121"/>-->
-<!--                <input type="hidden" name="password" value="qwerty123"/>-->
-<!---->
-<!--                <input type="submit" value="login" />-->
-<!--            </form>-->
-
-
+                <button id="code_send" class="pari-btn">LOG IN</button>
+            </div>
         </div>
+
+
     </div>
 </section>
 

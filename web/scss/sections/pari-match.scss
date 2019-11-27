@@ -107,6 +107,7 @@
     transform: translateX(-50%);
   }
   &__form {
+    display: none;
     @media(max-width: $md-width) {
 
     }
@@ -122,6 +123,12 @@
       @media(max-width: $md-width) {
         color: $white;
       }
+    }
+    &--active {
+      display: block;
+    }
+    &__wrap {
+
     }
   }
 }

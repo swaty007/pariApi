@@ -1,3 +1,37 @@
 img {
   max-width: 100%;
 }
+.pari-btn {
+  outline: none;
+  appearance: none;
+  box-shadow: none;
+  text-decoration: none;
+  border: none;
+
+  font-family: 'ParimatchMedium';
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 58px;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  display: block;
+  border-radius: 6px;
+  text-align: center;
+
+  width: 100%;
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+
+  background-color: $black;
+  color: $yellow;
+  transition: 0.3s all;
+  &:hover {
+    opacity: 0.8;
+    text-decoration: none;
+    color: $yellow;
+  }
+  &[disabled] {
+    opacity: 0.4;
+  }
+}

@@ -96,8 +96,6 @@ class PariMatch extends Model
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($post_data));
 
         $data = curl_exec($this->ch);
-        echo var_dump($data);
-//        die();
         if ($data !== false) {
             if (PHP_INT_SIZE < 8 && version_compare(PHP_VERSION, '5.4.0') >= 0) {
                 // We are on 32-bit PHP, so use the bigint as string option. If you are using any API calls with

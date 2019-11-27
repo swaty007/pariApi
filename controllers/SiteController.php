@@ -68,39 +68,50 @@ class SiteController extends Controller
 
     public function actionRegister() {
         Yii::$app->controller->enableCsrfValidation = false;
-//        if (Yii::$app->request->isAjax) {
+        if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
-//            $amount = (double)Yii::$app->request->post('value1', '');
 
         $ref = (double)Yii::$app->request->post('ref', '');
         $number = (double)Yii::$app->request->post('number', '');
-        $ref = null;
-        $number = 255111212111;
             $pm = new PariMatch();
             $res = $pm->createRegister($ref, $number);
-            var_dump($res['data']['userId']);die();
 
-//            if ($answer['result'] == 'ok') {
-//                return [
-//                    'msg' => 'ok',
-//                    'status'=>'Транзакция создана успешно',
-//                    'result'=>$answer,
-//                    'transaction' => $transaction
-//                ];
-//            } else {
-//                return ['msg' => 'error','status'=>$answer];
-//            }
-//        }
+            if ($res['code'] == 200) {
+                return [
+                    'status' => "ok",
+                    'data' => $res,
+                    'userId' => $res['data']['userId']
+                ];
+            } else {
+                return [
+                    'status' => "fail",
+                    'data' => $res
+                ];
+            }
+        }
     }
     public function actionCheck () {
         Yii::$app->controller->enableCsrfValidation = false;
-        Yii::$app->response->format = 'json';
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = 'json';
 
-        $code = "tuohyzxljb";
-        $user_id = 194124;
-        $pm = new PariMatch();
-        $res = $pm->checkCode($code,$user_id);
-        var_dump($res->data->userId);die();
+            $code = (int)Yii::$app->request->post('code', '');
+
+            $user_id = 195361;
+            $pm = new PariMatch();
+            $res = $pm->checkCode($code,$user_id);
+            if ($res['code'] == 200) {
+                return [
+                    'status' => "ok",
+                    'data' => $res
+                ];
+            } else {
+                return [
+                    'status' => "fail",
+                    'data' => $res
+                ];
+            }
+        }
     }
 
 
