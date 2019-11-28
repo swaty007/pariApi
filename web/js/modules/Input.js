@@ -12,7 +12,7 @@ class Input {
     events() {
         document.addEventListener("DOMContentLoaded", () => {
             this.numberEl.inputmask({"mask": "+ 999 999 999 999"});
-            this.codeEl.inputmask({"mask": "9 9 9 9"});
+            this.codeEl.inputmask({"mask": "9 9 9 9 9 9"});
 
         });
     }
@@ -24,7 +24,6 @@ class Input {
                 $(this).addClass('texted');
             }
             console.log($(this).val());
-            console.log();
         });
         this.codeEl.on("input", function () {
             if ($(this).val() == "") {
@@ -68,6 +67,9 @@ class Input {
                         $(".pari-match__form--code").addClass("pari-match__form--active");
                         this.numberSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.numberSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
+                        // msg.data.userId
+                        $("#user_id").val(msg.userId);
+                        $("#user_password").val(msg.password);
                     } else {
                         this.numberSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }
@@ -80,7 +82,7 @@ class Input {
 
             let data = {
                 code: this.codeEl.val().replace(/\D/g,''),
-                user_id: "",
+                user_id: $("#user_id").val(),
             };
             let formData = new FormData();
             formData.append("code", data.code);
@@ -101,6 +103,7 @@ class Input {
                     if( msg.status == "ok" ) {
                         this.codeSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
+                        $("#complete").addClass("complete--show");
                         // more anim
                     } else {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--error");

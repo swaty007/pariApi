@@ -13,8 +13,9 @@ class PariMatch extends Model
     private $ch = null;
 
 
-    public function createRegister($ref, $number)
+    public function createRegister($ref, $number, $password)
     {
+
         $data = array(
             "affiliateCode" =>  $ref, // parimatch.co.tz/?ref=test, взять с ссылки  на сайте
             "brandCountryCode" =>  null,
@@ -24,12 +25,12 @@ class PariMatch extends Model
             "countryCode" =>  "TZ", // страна
             "currencyCode" =>  "TZ",
             "languageCode" =>  "EN", // язык
-            "loginName" =>  $number, // поле ввода (для теста используй номера 001212111-001212999)
+            "loginName" =>  substr($number,3), // поле ввода (для теста используй номера 001212111-001212999)
             "mobile" =>  $number, // поле ввода
-            "password" =>  "Pm12345", // автосгенерированный пароль - по типу 6 символов из которых    минимум одна цифра
+            "password" =>  $password, // автосгенерированный пароль - по типу 6 символов из которых    минимум одна цифра
             "receiveEmail" =>  $number, // поле ввода
             "receiveSms" =>  $number, // поле ввода
-            "verificationType" =>  "account-and-sms"
+            "verificationType" =>  1
         );
 
 

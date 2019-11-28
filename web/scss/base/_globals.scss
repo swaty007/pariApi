@@ -6,12 +6,12 @@ img {
   appearance: none;
   box-shadow: none;
   text-decoration: none;
-  border: none;
+  border: 1px solid $black;
 
   font-family: 'ParimatchMedium';
   font-weight: 500;
   font-size: 26px;
-  line-height: 58px;
+  line-height: 56px;
   font-style: italic;
   letter-spacing: 0.12em;
   display: block;
@@ -26,10 +26,26 @@ img {
   background-color: $black;
   color: $yellow;
   transition: 0.3s all;
+  @media(max-width: $md-width) {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    border-radius: 16px 0px 0px 0px;
+    border-color: $white;
+    background: $yellow;
+    color: $black;
+    padding: 0 30px;
+    line-height: 46px;
+    width: auto;
+  }
   &:hover {
     opacity: 0.8;
     text-decoration: none;
     color: $yellow;
+    @media(max-width: $md-width) {
+      color: $black;
+    }
   }
   &[disabled] {
     opacity: 0.4;

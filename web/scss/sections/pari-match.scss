@@ -5,18 +5,24 @@
   align-items: stretch;
   justify-content: space-evenly;
   @media(max-width: $md-width) {
-    justify-content: space-evenly;
-    background-color: $black;
+    justify-content: flex-end;
+    background-color: $background-black;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 60px;
   }
   &__left, &__right {
     display: flex;
     flex-direction: column;
     width: 50%;
     padding: 0 80px;
+    z-index: 5;
     @media(max-width: $md-width) {
       width: 100%;
+      padding: 0 30px;
+    }
+    @media(min-width: 992px) {
+      position: relative;
     }
   }
   &__left {
@@ -24,9 +30,6 @@
     justify-content: flex-end;
     padding-bottom: 80px;
 
-    @media(min-width: 992px) {
-      position: relative;
-    }
     &--background {
       position: absolute;
       left:0;
@@ -34,6 +37,9 @@
       width: 100%;
       z-index: 2;
       height: 70%;
+      @media(max-width: $md-width) {
+        height: 80%;
+      }
     }
     &--img {
       position: absolute;
@@ -41,14 +47,19 @@
       top: 50%;
       transform: translate(-50%,-50%);
       z-index: 1;
+      @media(max-width: $md-width) {
+        top: 60px;
+        transform: translateX(-50%);
+      }
     }
   }
   &__right {
-    background-color: $white;
+
     justify-content: center;
-    position: relative;
+    @media(min-width: 992px) {
+      background-color: $white;
+    }
     @media(max-width: $md-width) {
-      position: relative;
       color: $black;
     }
   }
@@ -72,7 +83,6 @@
   }
   &__title {
     font-family: 'ParimatchBold';
-    font-style: italic;
     font-weight: bold;
     font-size: 112px;
     line-height: 134px;
@@ -105,6 +115,9 @@
     top: 60px;
     left: 50%;
     transform: translateX(-50%);
+    @media(max-width: $md-width) {
+      top: 20px;
+    }
   }
   &__form {
     display: none;
@@ -122,6 +135,8 @@
       color: $black;
       @media(max-width: $md-width) {
         color: $white;
+        font-size: 14px;
+        line-height: 21px;
       }
     }
     &--active {

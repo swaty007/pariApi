@@ -26,7 +26,7 @@
       }
     }
     &--success {
-      background-image: url(../../img/icon_ok.svg);
+      background-image: url(../../img/icon_ok_green.svg);
     }
   }
   &__error {
@@ -38,6 +38,9 @@
     text-align: center;
     color: $red;
     display: none;
+    @media(max-width: $md-width) {
+      background-color: #3e2426;
+    }
   }
   &__el {
     z-index: 40;
@@ -51,22 +54,36 @@
     font-size: 18px;
     color: $black;
     letter-spacing: 5px;
+    @media(max-width: $md-width) {
+      color: $white;
+      background-color: #3c3e40;
+      border: none;
+    }
     &--code {
       padding: 0 70px 0 50px;
       background-image: url(../../img/icon_lock.svg);
       background-repeat: no-repeat;
       background-position: 15px center;
+      @media(max-width: $md-width) {
+        background-image: url(../../img/icon_lock_white.svg);
+      }
     }
     &--tel {
       background-image: url(../../img/icon_phone.svg);
       background-repeat: no-repeat;
       background-position: 15px center;
+      @media(max-width: $md-width) {
+        background-image: url(../../img/icon_phone_white.svg);
+      }
       &:hover,&:focus,&.texted {
         background-image: none;
       }
     }
     &::placeholder {
       color: fade_out($black, 0.5);
+      @media(max-width: $md-width) {
+        color: fade_out($white, 0.5);
+      }
     }
     &:focus,&:hover {
 

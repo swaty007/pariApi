@@ -67,20 +67,33 @@ class SiteController extends Controller
 
 
     public function actionRegister() {
-        Yii::$app->controller->enableCsrfValidation = false;
+//        Yii::$app->controller->enableCsrfValidation = false;
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
 
-        $ref = (double)Yii::$app->request->post('ref', '');
-        $number = (double)Yii::$app->request->post('number', '');
+            $ref = (double)Yii::$app->request->post('ref', '');
+            $number = (double)Yii::$app->request->post('number', '');
+
+            if (empty($ref) || empty($number)) {
+                return [
+                    'status' => "fail"
+                ];
+            }
+
+            $password = "";
+            do {
+                $password = Yii::$app->security->generateRandomString(6);
+            } while ( preg_match('/\w*[A-Z]\w*[0-9]\w*/', $password) !== 1 && strlen($password) === 6 );
+
             $pm = new PariMatch();
-            $res = $pm->createRegister($ref, $number);
+            $res = $pm->createRegister($ref, $number, $password);
 
             if ($res['code'] == 200) {
                 return [
                     'status' => "ok",
                     'data' => $res,
-                    'userId' => $res['data']['userId']
+                    'userId' => $res['data']['userId'],
+                    'password' => $password
                 ];
             } else {
                 return [
@@ -91,15 +104,20 @@ class SiteController extends Controller
         }
     }
     public function actionCheck () {
-        Yii::$app->controller->enableCsrfValidation = false;
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
 
             $code = (int)Yii::$app->request->post('code', '');
+            $user_id = (int)Yii::$app->request->post('user_id', '');
 
-            $user_id = 195361;
+            if (empty($code) || empty($user_id)) {
+                return [
+                    'status' => "fail"
+                ];
+            }
+
             $pm = new PariMatch();
-            $res = $pm->checkCode($code,$user_id);
+            $res = $pm->checkCode($code, $user_id);
             if ($res['code'] == 200) {
                 return [
                     'status' => "ok",
@@ -114,9 +132,8 @@ class SiteController extends Controller
         }
     }
 
-
     public function actionLogin () {
-        Yii::$app->controller->enableCsrfValidation = false;
+//        Yii::$app->controller->enableCsrfValidation = false;
         Yii::$app->response->format = 'json';
 
         $number = 123223121;

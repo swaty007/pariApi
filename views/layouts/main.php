@@ -51,7 +51,7 @@ AppAsset::register($this);
                 </p>
                 <div class="input">
                     <div class="input__status"></div>
-                    <input id="number_mask" type="tel" class="input__el input__el--tel">
+                    <input id="number_mask" type="tel" class="input__el input__el--tel" />
                     <p class="input__error">
                         You entered an verification code.
                     </p>
@@ -73,7 +73,9 @@ AppAsset::register($this);
                 </p>
                 <div class="input">
                     <div class="input__status"></div>
-                    <input id="code_mask" type="text" class="input__el input__el--code">
+                    <input id="code_mask" type="text" class="input__el input__el--code" />
+                    <input id="user_id" type="hidden">
+                    <input id="user_password" type="hidden">
                     <p class="input__error">
                         You entered an verification code.
                     </p>
@@ -83,7 +85,16 @@ AppAsset::register($this);
             </div>
         </div>
 
-
+    </div>
+    <div id="complete" class="complete">
+        <div class="complete__container">
+            <div class="complete__img--block">
+                <?= Html::img('@web/img/icon_ok.svg.svg', ['class' => 'complete__img']); ?>
+            </div>
+            <p class="pari-match__form--text">
+                You are authorized.
+            </p>
+        </div>
     </div>
 </section>
 
