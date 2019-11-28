@@ -15,7 +15,6 @@ class PariMatch extends Model
 
     public function createRegister($ref, $number, $password)
     {
-
         $data = array(
             "affiliateCode" =>  $ref, // parimatch.co.tz/?ref=test, взять с ссылки  на сайте
             "brandCountryCode" =>  null,
@@ -33,16 +32,23 @@ class PariMatch extends Model
             "verificationType" =>  1
         );
 
-
         return $this->apiCall('https://parimatch.co.tz/rest/customer/account/register', $data);
     }
 
-    public function checkCode ($code,$user_id) {
+    public function checkCode ($code, $user_id, $password) {
         $data = array(
             "activationCode" => $code, //код из смс(когда будешь на этом этапе, спросишь у меня)
             "activationType" => "account-and-sms",
             "customerId" => $user_id //переменная из ответа прошлого запроса
         );
+//        "code": 200,
+//    "description": "OK.",
+//    "data": true
+
+
+//        "code": 457,
+//    "description": "Activation not succeeded"
+
 
         return $this->apiCall('https://parimatch.co.tz/rest/customer/account/activate-account', $data);
     }
@@ -53,6 +59,8 @@ class PariMatch extends Model
             "password" => $password, //автосгенерированный пароль при первой итерации
         );
         return $this->apiCall('https://parimatch.co.tz/rest/customer/session/login', $data);
+//        string(75) "{"code":500,"description":"Thrown in Betting Api || Thrown in Betting Api"}" array(2) { ["code"]=> int(500) ["description"]=> string(46) "Thrown in Betting Api || Thrown in Betting Api" }
+//        string(858) "{"code":200,"description":"OK.","data":{"auth":"4xQyd1H54FU4Pme243anY2IvisLK8kw","language":"EN ","logged":true,"userId":189438,"login":"123223121","sessionIP":null,"lastBalanceCheck":1574710577789,"lastBonusBalanceCheck":1574710577836,"firstName":"null","lastName":"null","email":"","balance":0.0,"bonusBalance":null,"currencyCode":"TZS","pinCode":"null","sessionStart":1574710577789,"bonusBalanceList":[],"mobile":"255123223121","countryCode":"TZ","bankId":null,"brandId":1,"accountStatus":null,"notifications":[{"taskId":620723,"objectId":189438,"customerId":189438,"type":10,"status":0,"subject":"Today registered","message":"{\"type\":41,\"registration\":true,\"postBackNotify\":\"registration\"}","regDate":1574260757824,"modDate":1574260757824,"expDate":2709556757824}],"userIdHash":"ff4a5587dbc83105678b88bd5e8acf009b30f2bb511e0276d33b69e3d3073abf"}}" array(3) { ["code"]=> int(200) ["description"]=> string(3) "OK." ["data"]=> array(24) { ["auth"]=> string(31) "4xQyd1H54FU4Pme243anY2IvisLK8kw" ["language"]=> string(3) "EN " ["logged"]=> bool(true) ["userId"]=> int(189438) ["login"]=> string(9) "123223121" ["sessionIP"]=> NULL ["lastBalanceCheck"]=> int(1574710577789) ["lastBonusBalanceCheck"]=> int(1574710577836) ["firstName"]=> string(4) "null" ["lastName"]=> string(4) "null" ["email"]=> string(0) "" ["balance"]=> float(0) ["bonusBalance"]=> NULL ["currencyCode"]=> string(3) "TZS" ["pinCode"]=> string(4) "null" ["sessionStart"]=> int(1574710577789) ["bonusBalanceList"]=> array(0) { } ["mobile"]=> string(12) "255123223121" ["countryCode"]=> string(2) "TZ" ["bankId"]=> NULL ["brandId"]=> int(1) ["accountStatus"]=> NULL ["notifications"]=> array(1) { [0]=> array(10) { ["taskId"]=> int(620723) ["objectId"]=> int(189438) ["customerId"]=> int(189438) ["type"]=> int(10) ["status"]=> int(0) ["subject"]=> string(16) "Today registered" ["message"]=> string(63) "{"type":41,"registration":true,"postBackNotify":"registration"}" ["regDate"]=> int(1574260757824) ["modDate"]=> int(1574260757824) ["expDate"]=> int(2709556757824) } } ["userIdHash"]=> string(64) "ff4a5587dbc83105678b88bd5e8acf009b30f2bb511e0276d33b69e3d3073abf" } }
         $sms = $this->sendSms($number, $password);
 
     }

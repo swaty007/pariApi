@@ -62,7 +62,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $session = Yii::$app->session;
+        $session->open();
+        $user_data = $session->get('user_data');
+        $session->close();
+        return $this->render('index', ['user_data' => $user_data]);
     }
 
 
@@ -89,6 +93,17 @@ class SiteController extends Controller
             $res = $pm->createRegister($ref, $number, $password);
 
             if ($res['code'] == 200) {
+
+                $session = Yii::$app->session;
+                $session->open();
+                $session->set('user_data', array(
+                    'userId' => $res['data']['userId'],
+                    'number' => $number,
+                    'password' => $password,
+                    'step' => 2
+                ));
+                $session->close();
+
                 return [
                     'status' => "ok",
                     'data' => $res,
@@ -110,7 +125,7 @@ class SiteController extends Controller
 
             $code = (int)Yii::$app->request->post('code', '');
             $user_id = (int)Yii::$app->request->post('user_id', '');
-            $password = Yii::$app->request->post('password', '');
+            $password = (string)Yii::$app->request->post('password', '');
             $number = (int)Yii::$app->request->post('number', '');
 
             if (empty($code) || empty($user_id) || empty($number) || empty($password) || strlen($number) !== 12 || strlen($password) !== 6) {
@@ -120,8 +135,14 @@ class SiteController extends Controller
             }
 
             $pm = new PariMatch();
-            $res = $pm->checkCode($code, $user_id);
+            $res = $pm->checkCode($code, $user_id, $password);
             if ($res['code'] == 200) {
+
+                $session = Yii::$app->session;
+                $session->open();
+                $session->remove('user_data');
+                $session->close();
+
                 return [
                     'status' => "ok",
                     'data' => $res

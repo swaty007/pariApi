@@ -1,6 +1,6 @@
 class Input {
     constructor() {
-        this.step = 1;
+        this.step = $("#step_one").hasClass("pari-match__form--active") ? 1 : 2;
         this.numberEl = $("#number_mask");
         this.numberSendEl = $("#number_send");
         this.codeEl = $("#code_mask");
@@ -144,7 +144,6 @@ class Input {
                         this.codeSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
                         $("#complete").addClass("complete--show");
-                        // more anim
                     } else {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }
