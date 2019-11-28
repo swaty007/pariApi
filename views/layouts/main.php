@@ -57,7 +57,7 @@ AppAsset::register($this);
                     </p>
                 </div>
 
-                <button id="number_send" class="pari-btn pari-btn--send">NEXT</button>
+                <button id="number_send" class="pari-btn pari-btn--number" disabled>NEXT</button>
 
                 <!--            <form method="post" action="https://parimatch.co.tz/rest/customer/session/login" enctype="multipart/form-data">-->
                 <!--                <input type="hidden" name="login"  value="123223121"/>-->
@@ -81,8 +81,8 @@ AppAsset::register($this);
                         You entered an verification code.
                     </p>
                 </div>
-
-                <button id="code_send" class="pari-btn">LOG IN</button>
+                <button id="step_back" class="pari-btn pari-btn--back" ></button>
+                <button id="code_send" class="pari-btn pari-btn--code" disabled>LOG IN</button>
             </div>
         </div>
 

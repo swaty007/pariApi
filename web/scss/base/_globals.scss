@@ -26,8 +26,14 @@ img {
   background-color: $black;
   color: $yellow;
   transition: 0.3s all;
-  &--send {
+  &--number {
 
+  }
+  &--code {
+
+  }
+  &--back {
+    display: none;
   }
   @media(max-width: $md-width) {
     position: absolute;
@@ -41,12 +47,25 @@ img {
     padding: 0 30px;
     line-height: 46px;
     width: auto;
-    &--send {
+    &--number {
       background-image: url(../../img/arrow-right.svg);
       background-repeat: no-repeat;
       background-position: 50% 50%;
       text-indent: -9999px;
       font-size: 0;
+    }
+    &--back {
+      background-image: url(../../img/arrow-left_white.svg);
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      text-indent: -9999px;
+      font-size: 0;
+      border: none;
+      background-color: transparent;
+      right: unset;
+      left: 0;
+      height: 48px;
+      display: block;
     }
   }
   &:hover {
@@ -59,5 +78,8 @@ img {
   }
   &[disabled] {
     opacity: 0.4;
+    @media(max-width: $md-width) {
+      opacity: 0;
+    }
   }
 }

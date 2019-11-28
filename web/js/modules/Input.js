@@ -1,10 +1,11 @@
 class Input {
     constructor() {
-        this.step = 0;
+        this.step = 1;
         this.numberEl = $("#number_mask");
         this.numberSendEl = $("#number_send");
         this.codeEl = $("#code_mask");
         this.codeSendEl = $("#code_send");
+        this.stepBackEl = $("#step_back");
         this.events();
         this.validation();
         this.ajax();
@@ -13,28 +14,49 @@ class Input {
         document.addEventListener("DOMContentLoaded", () => {
             this.numberEl.inputmask({"mask": "+ 999 999 999 999"});
             this.codeEl.inputmask({"mask": "9 9 9 9 9 9"});
-
+            this.numberSendEl.attr("disabled", true);
+            this.codeSendEl.attr("disabled", true);
+        });
+        this.stepBackEl.on("click", () => {
+            this.step = 1;
+            $(".pari-match__form--number").addClass("pari-match__form--active");
+            $(".pari-match__form--code").removeClass("pari-match__form--active");
+            $("#user_id").val("");
+            $("#user_password").val("");
+            $("#user_number").val("");
         });
     }
     validation() {
-        this.numberEl.on("input", function () {
-            if ($(this).val() == "") {
-                $(this).removeClass('texted');
+        this.numberEl.on("input", () => {
+            let el = this.numberEl;
+            if (el.val() == "") {
+                el.removeClass('texted');
             } else {
-                $(this).addClass('texted');
+                el.addClass('texted');
             }
-            if ($(this).val().replace(/\D/g,'')) {
-                $(this).siblings(".input__status").removeClass("input__status--error");
+            if (el.val().replace(/\D/g,'')) {
+                el.siblings(".input__status").removeClass("input__status--error");
+            }
+            if (el.val().replace(/\D/g,'').length === 12) {
+                this.numberSendEl.attr("disabled", false);
+            } else {
+                this.numberSendEl.attr("disabled", true);
             }
         });
-        this.codeEl.on("input", function () {
-            if ($(this).val() == "") {
-                $(this).removeClass('texted');
+        this.codeEl.on("input", () => {
+            let el = this.codeEl;
+            if (el.val() == "") {
+                el.removeClass('texted');
             } else {
-                $(this).addClass('texted');
+                el.addClass('texted');
             }
-            if ($(this).val().replace(/\D/g,'')) {
-                $(this).siblings(".input__status").removeClass("input__status--error");
+            if (el.val().replace(/\D/g,'')) {
+                el.siblings(".input__status").removeClass("input__status--error");
+            }
+            if (el.val().replace(/\D/g,'').length === 6) {
+                this.codeSendEl.attr("disabled", false);
+            } else {
+                this.codeSendEl.attr("disabled", true);
             }
         });
         $(document).on("click",".input__status--error", function (e) {
@@ -45,6 +67,10 @@ class Input {
     ajax() {
         this.numberSendEl.on('click', (e) => {
             e.preventDefault();
+            if (this.step !== 1) {
+                return;
+            }
+            this.numberSendEl.attr("disabled", true);
             let data = {
                 ref: this.getAllUrlParams(window.location.href).ref,
                 number: this.numberEl.val().replace(/\D/g,''),
@@ -70,6 +96,7 @@ class Input {
                         this.numberSendEl.siblings(".input__status").removeClass(".input__status--error");
                         $(".pari-match__form--number").removeClass("pari-match__form--active");
                         $(".pari-match__form--code").addClass("pari-match__form--active");
+                        this.step = 2;
                         this.numberSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.numberSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
                         // msg.data.userId
@@ -80,12 +107,17 @@ class Input {
                         this.numberSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }
                 }
-            })
+            }).always(() => {
+                this.numberSendEl.attr("disabled", false);
+            });
 
         });
         this.codeSendEl.on("click", (e) => {
             e.preventDefault();
-
+            if (this.step !== 2) {
+                return;
+            }
+            this.codeSendEl.attr("disabled", true);
             let data = {
                 code: this.codeEl.val().replace(/\D/g,''),
                 user_id: $("#user_id").val(),
@@ -116,9 +148,10 @@ class Input {
                     } else {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }
-
                 }
-            })
+            }).always(() => {
+                this.codeSendEl.attr("disabled", false);
+            });
         });
     }
     getAllUrlParams(url) {
