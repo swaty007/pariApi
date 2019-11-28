@@ -89,7 +89,7 @@ AppAsset::register($this);
     <div id="complete" class="complete">
         <div class="complete__container">
             <div class="complete__img--block">
-                <?= Html::img('@web/img/icon_ok.svg.svg', ['class' => 'complete__img']); ?>
+                <?= Html::img('@web/img/icon_ok.svg', ['class' => 'complete__img']); ?>
             </div>
             <p class="pari-match__form--text">
                 You are authorized.
