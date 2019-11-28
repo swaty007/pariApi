@@ -49,16 +49,16 @@ class PariMatch extends Model
     public function login ($number, $password) {
 
         $data = array(
-            "login" => $number, // то что было в поле ввода при первой итерации
+            "login" => substr($number,3), // то что было в поле ввода при первой итерации
             "password" => $password, //автосгенерированный пароль при первой итерации
         );
         return $this->apiCall('https://parimatch.co.tz/rest/customer/session/login', $data);
-        $sms = $this->sendSms($number,"Pm12345");
+        $sms = $this->sendSms($number, $password);
 
     }
     private function sendSms ($number, $password) {
-        $username_api = 'o.pimonov';
-        $pass_api = 'C^+S8rFg:rmFhU@M';
+        $username_api = Yii::$app->params['usernameApi'];
+        $pass_api = Yii::$app->params['passApi'];
         $headers = array(
             "Content-Type: application/json",
             "Accept: application/json",

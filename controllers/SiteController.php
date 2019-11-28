@@ -71,10 +71,10 @@ class SiteController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
 
-            $ref = (double)Yii::$app->request->post('ref', '');
-            $number = (double)Yii::$app->request->post('number', '');
+            $ref = Yii::$app->request->post('ref', '');
+            $number = Yii::$app->request->post('number', '');
 
-            if (empty($ref) || empty($number)) {
+            if (empty($ref) || empty($number) || strlen($number) !== 12) {
                 return [
                     'status' => "fail"
                 ];
@@ -93,6 +93,7 @@ class SiteController extends Controller
                     'status' => "ok",
                     'data' => $res,
                     'userId' => $res['data']['userId'],
+                    'number' => $number,
                     'password' => $password
                 ];
             } else {
@@ -109,8 +110,10 @@ class SiteController extends Controller
 
             $code = (int)Yii::$app->request->post('code', '');
             $user_id = (int)Yii::$app->request->post('user_id', '');
+            $password = Yii::$app->request->post('password', '');
+            $number = (int)Yii::$app->request->post('number', '');
 
-            if (empty($code) || empty($user_id)) {
+            if (empty($code) || empty($user_id) || empty($number) || empty($password) || strlen($number) !== 12 || strlen($password) !== 6) {
                 return [
                     'status' => "fail"
                 ];
@@ -134,12 +137,14 @@ class SiteController extends Controller
 
     public function actionLogin () {
 //        Yii::$app->controller->enableCsrfValidation = false;
-        Yii::$app->response->format = 'json';
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = 'json';
 
-        $number = 123223121;
-        $password = "qwerty123";
-        $pm = new PariMatch();
-        $res = $pm->login($number, $password);
-        var_dump($res);die();
+            $number = 123223121;
+            $password = "qwerty123";
+            $pm = new PariMatch();
+            $res = $pm->login($number, $password);
+            var_dump($res);die();
+        }
     }
 }
