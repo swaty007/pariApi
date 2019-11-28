@@ -23,13 +23,18 @@ class Input {
             } else {
                 $(this).addClass('texted');
             }
-            console.log($(this).val());
+            if ($(this).val().replace(/\D/g,'')) {
+                $(this).siblings(".input__status").removeClass("input__status--error");
+            }
         });
         this.codeEl.on("input", function () {
             if ($(this).val() == "") {
                 $(this).removeClass('texted');
             } else {
                 $(this).addClass('texted');
+            }
+            if ($(this).val().replace(/\D/g,'')) {
+                $(this).siblings(".input__status").removeClass("input__status--error");
             }
         });
         $(document).on("click",".input__status--error", function (e) {
