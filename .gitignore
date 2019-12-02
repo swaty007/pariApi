@@ -36,6 +36,9 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
+tests/_output/*
+tests/_support/_generated
+
 # ignore generated files
 web/index.php
 web/index-test.php

@@ -19,6 +19,9 @@ $config = [
 //                'yii\bootstrap\BootstrapAsset' => ['css' => []]
 //            ]
 //        ],
+        'session' => [
+            'timeout' => 360, // 2 weeks, 3600 - 1 hour, Default 1440
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'HJF3248*#$312jfskl!23#$',
