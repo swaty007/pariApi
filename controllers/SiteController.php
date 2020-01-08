@@ -91,7 +91,11 @@ class SiteController extends Controller
 
             $pm = new PariMatch();
             $res = $pm->createRegister($ref, $number, $password);
-
+//            return [
+//                'status' => 'ok',
+//                'number' => 127746355,
+//                'password' => 'Pm12345'
+//            ];
             if ($res['code'] == 200) {
 
                 $session = Yii::$app->session;
@@ -128,12 +132,19 @@ class SiteController extends Controller
             $password = (string)Yii::$app->request->post('password', '');
             $number = (int)Yii::$app->request->post('number', '');
 
-            if (empty($code) || empty($user_id) || empty($number) || empty($password) || strlen($number) !== 12 || strlen($password) !== 6) {
+//            echo $code.'    ';
+//            echo $user_id.'    ';
+//            echo $password.'    ';
+//            echo $number;
+            return [
+                'status' => "ok",
+                'data' => 'data'
+            ];
+            if (empty($code) || empty($user_id) || empty($number) || empty($password) ) {//|| strlen($number) !== 12 || strlen($password) !== 7
                 return [
                     'status' => "fail"
                 ];
             }
-
             $pm = new PariMatch();
             $res = $pm->checkCode($code, $user_id, $password);
             if ($res['code'] == 200) {
@@ -161,11 +172,28 @@ class SiteController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
 
-            $number = 123223121;
-            $password = "qwerty123";
+            $number = (int)Yii::$app->request->post('number', '');
+            $password = (string)Yii::$app->request->post('password', '');
+
+            $number = "___127746355";
+            $password = "Pm12345";
             $pm = new PariMatch();
             $res = $pm->login($number, $password);
-            var_dump($res);die();
+
+            if ($res['code'] == 200) {
+
+                preg_match('/X-ODDS-SESSION: (?P<value>(.*?)\n)/', $res['headers'], $matches);
+                $res['href'] = "https://parimatch.co.tz/?sessionAuth=".trim($matches['value']);
+                return [
+                    'status' => "ok",
+                    'data' => $res
+                ];
+            } else {
+                return [
+                    'status' => "fail",
+                    'data' => $res
+                ];
+            }
         }
     }
 }

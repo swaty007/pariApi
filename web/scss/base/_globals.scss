@@ -33,7 +33,8 @@ img {
 
   }
   &--back {
-    display: none;
+    //display: none;
+    margin-bottom: 20px;
   }
   @media(max-width: $md-width) {
     position: absolute;
@@ -65,7 +66,8 @@ img {
       right: unset;
       left: 0;
       height: 48px;
-      display: block;
+      //display: block;
+      margin-bottom: 0;
     }
   }
   &:hover {

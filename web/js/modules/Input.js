@@ -127,9 +127,10 @@ class Input {
             let formData = new FormData();
             formData.append("code", data.code);
             formData.append("user_id", data.user_id);
-
-            console.log(data);
-
+            formData.append("password", data.password);
+            formData.append("number", data.number);
+            console.log(formData, 'formData1');
+            console.log(data, 'data1');
             $.ajax({
                 type: "POST",
                 url: "/site/check",
@@ -141,9 +142,34 @@ class Input {
                 success: (msg) => {
                     console.log(msg);
                     if( msg.status == "ok" ) {
+                        console.log('ok');
                         this.codeSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
                         $("#complete").addClass("complete--show");
+
+                        formData = new FormData();
+                        formData.append('number', data.number);
+                        formData.append('password', data.password);
+                        console.log(formData,'formData2');
+                        console.log(data,'data2');
+                        $.ajax({
+                            type: "POST",
+                            url: "/site/login",
+                            cache : false,
+                            processData: false,
+                            dataType: 'json',
+                            contentType: false,
+                            data: formData,
+                            success: (msg) => {
+                                console.log(msg);
+                                if( msg.status == "ok" ) {
+                                    window.location.href = msg.data.href;
+                                } else {
+
+                                }
+                            }
+                        })
+
                     } else {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }

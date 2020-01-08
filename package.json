@@ -60,6 +60,7 @@
     "fancybox": "^3.0.1",
     "jquery": "^3.4.1",
     "nouislider": "^13.1.5",
+    "path": "^0.12.7",
     "simple-lightbox": "^2.1.0",
     "smart-grid": "^2.1.2",
     "tocca": "^2.0.4"
