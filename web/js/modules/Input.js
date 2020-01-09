@@ -153,21 +153,22 @@ class Input {
                         // console.log(formData,'formData2');
                         console.log(data,'data2');
 
-                        var myHeaders = new Headers();
-                        myHeaders.append('X-BRAND-DATA', '1');
+
                         var xhr = new XMLHttpRequest();
                         xhr.open("POST", 'https://parimatch.co.tz/rest/customer/session/login', true);
                         //Передает правильный заголовок в запросе
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.setRequestHeader("X-BRAND-DATA", "1");
                         var data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_password").val()}"}`;
+                        // var data = `{"login":"123223121","password":"qwerty123"}`;
                         console.log(data,'data3');
                         xhr.onreadystatechange = function() {//Вызывает функцию при смене состояния.
                             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                 console.log(JSON.parse(this.response));
                                 var resHeader = xhr.getResponseHeader('X-ODDS-SESSION');
+                                console.log(resHeader);
                                 if (resHeader) {
-                                    window.location.href = "https://parimatch.co.tz/?sessionAuth="+resHeader;
+                                     window.location.href = "https://parimatch.co.tz/?sessionAuth="+resHeader;
                                 }
                                 // Запрос завершен. Здесь можно обрабатывать результат.
                             }

@@ -75,7 +75,7 @@ class SiteController extends Controller
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = 'json';
 
-            $ref = Yii::$app->request->post('ref', '');
+            $ref = Yii::$app->request->post('ref', 'test');
             $number = Yii::$app->request->post('number', '');
 
             if (empty($ref) || empty($number) || strlen($number) !== 12) {
@@ -86,8 +86,8 @@ class SiteController extends Controller
 
             $password = "";
             do {
-                $password = Yii::$app->security->generateRandomString(6);
-            } while ( preg_match('/\w*[A-Z]\w*[0-9]\w*/', $password) !== 1 && strlen($password) === 6 );
+                $password = Yii::$app->security->generateRandomString(7);
+            } while ( preg_match('/\w*[A-Z]\w*[0-9]\w*/', $password) !== 1 && strlen($password) === 7 );
 
             $pm = new PariMatch();
             $res = $pm->createRegister($ref, $number, $password);
@@ -131,7 +131,10 @@ class SiteController extends Controller
             $user_id = (int)Yii::$app->request->post('user_id', '');
             $password = (string)Yii::$app->request->post('password', '');
             $number = (int)Yii::$app->request->post('number', '');
-
+//            return [
+//                'status' => "ok",
+//                'data' => ''
+//            ];
 //            echo $code.'    ';
 //            echo $user_id.'    ';
 //            echo $password.'    ';
@@ -150,7 +153,7 @@ class SiteController extends Controller
                 $session->open();
                 $session->remove('user_data');
                 $session->close();
-                $sms = $pm->sendSms(substr($number, 3), $password);
+                $sms = $pm->sendSms($number, $password);
                 return [
                     'status' => "ok",
                     'data' => $res

@@ -22,7 +22,7 @@ class PariMatch extends Model
             "channel" => "mobile", // тип представления лендинга
             "device" => "desktop", // тип устройства
             "countryCode" =>  "TZ", // страна
-            "currencyCode" =>  "TZ",
+            "currencyCode" =>  "TZS",
             "languageCode" =>  "EN", // язык
             "loginName" =>  substr($number,3), // поле ввода (для теста используй номера 001212111-001212999)
             "mobile" =>  $number, // поле ввода
