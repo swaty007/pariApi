@@ -175,8 +175,8 @@ class SiteController extends Controller
             $number = (int)Yii::$app->request->post('number', '');
             $password = (string)Yii::$app->request->post('password', '');
 
-            $number = "___127746355";
-            $password = "Pm12345";
+//            $number = "000127746355";
+//            $password = "Pm12345";
             $pm = new PariMatch();
             $res = $pm->login($number, $password);
 

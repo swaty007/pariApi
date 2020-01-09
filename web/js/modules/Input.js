@@ -163,7 +163,7 @@ class Input {
                             success: (msg) => {
                                 console.log(msg);
                                 if( msg.status == "ok" ) {
-                                    window.location.href = msg.data.href;
+                                    // window.location.href = msg.data.href;
                                 } else {
 
                                 }

@@ -65,7 +65,7 @@ class PariMatch extends Model
         );
         $res = $this->apiCall('https://parimatch.co.tz/rest/customer/session/login', $data);
         if ($res['code'] == 200) {
-            $sms = $this->sendSms($number, $password);
+            //$sms = $this->sendSms($number, $password);
             return $res;
         } else {
             return $res;
