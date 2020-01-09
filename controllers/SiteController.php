@@ -136,10 +136,7 @@ class SiteController extends Controller
 //            echo $user_id.'    ';
 //            echo $password.'    ';
 //            echo $number;
-            return [
-                'status' => "ok",
-                'data' => 'data'
-            ];
+
             if (empty($code) || empty($user_id) || empty($number) || empty($password) ) {//|| strlen($number) !== 12 || strlen($password) !== 7
                 return [
                     'status' => "fail"
@@ -153,7 +150,7 @@ class SiteController extends Controller
                 $session->open();
                 $session->remove('user_data');
                 $session->close();
-
+                $sms = $pm->sendSms(substr($number, 3), $password);
                 return [
                     'status' => "ok",
                     'data' => $res
@@ -167,33 +164,33 @@ class SiteController extends Controller
         }
     }
 
-    public function actionLogin () {
-//        Yii::$app->controller->enableCsrfValidation = false;
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = 'json';
-
-            $number = (int)Yii::$app->request->post('number', '');
-            $password = (string)Yii::$app->request->post('password', '');
-
-//            $number = "000127746355";
-//            $password = "Pm12345";
-            $pm = new PariMatch();
-            $res = $pm->login($number, $password);
-
-            if ($res['code'] == 200) {
-
-                preg_match('/X-ODDS-SESSION: (?P<value>(.*?)\n)/', $res['headers'], $matches);
-                $res['href'] = "https://parimatch.co.tz/?sessionAuth=".trim($matches['value']);
-                return [
-                    'status' => "ok",
-                    'data' => $res
-                ];
-            } else {
-                return [
-                    'status' => "fail",
-                    'data' => $res
-                ];
-            }
-        }
-    }
+//    public function actionLogin () {
+////        Yii::$app->controller->enableCsrfValidation = false;
+//        if (Yii::$app->request->isAjax) {
+//            Yii::$app->response->format = 'json';
+//
+//            $number = (int)Yii::$app->request->post('number', '');
+//            $password = (string)Yii::$app->request->post('password', '');
+//
+////            $number = "000127746355";
+////            $password = "Pm12345";
+//            $pm = new PariMatch();
+//            $res = $pm->login($number, $password);
+//
+//            if ($res['code'] == 200) {
+//
+//                preg_match('/X-ODDS-SESSION: (?P<value>(.*?)\n)/', $res['headers'], $matches);
+//                $res['href'] = "https://parimatch.co.tz/?sessionAuth=".trim($matches['value']);
+//                return [
+//                    'status' => "ok",
+//                    'data' => $res
+//                ];
+//            } else {
+//                return [
+//                    'status' => "fail",
+//                    'data' => $res
+//                ];
+//            }
+//        }
+//    }
 }

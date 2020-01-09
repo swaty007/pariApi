@@ -59,13 +59,13 @@ class PariMatch extends Model
             "password" => $password, //автосгенерированный пароль при первой итерации
         );
 
-        $data = array(
-            'login' => 127746355,
-            'password' => 'Pm12345'
-        );
+//        $data = array(
+//            'login' => 127746355,
+//            'password' => 'Pm12345'
+//        );
         $res = $this->apiCall('https://parimatch.co.tz/rest/customer/session/login', $data);
         if ($res['code'] == 200) {
-            //$sms = $this->sendSms($number, $password);
+            $sms = $this->sendSms($number, $password);
             return $res;
         } else {
             return $res;
@@ -75,7 +75,7 @@ class PariMatch extends Model
 
 
     }
-    private function sendSms ($number, $password) {
+    public function sendSms ($number, $password) {
         $username_api = Yii::$app->params['usernameApi'];
         $pass_api = Yii::$app->params['passApi'];
         $headers = array(

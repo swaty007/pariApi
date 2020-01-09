@@ -147,28 +147,47 @@ class Input {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
                         $("#complete").addClass("complete--show");
 
-                        formData = new FormData();
-                        formData.append('number', data.number);
-                        formData.append('password', data.password);
-                        console.log(formData,'formData2');
+                        // formData = new FormData();
+                        // formData.append('number', data.number);
+                        // formData.append('password', data.password);
+                        // console.log(formData,'formData2');
                         console.log(data,'data2');
-                        $.ajax({
-                            type: "POST",
-                            url: "/site/login",
-                            cache : false,
-                            processData: false,
-                            dataType: 'json',
-                            contentType: false,
-                            data: formData,
-                            success: (msg) => {
-                                console.log(msg);
-                                if( msg.status == "ok" ) {
-                                    // window.location.href = msg.data.href;
-                                } else {
 
-                                }
+                        var myHeaders = new Headers();
+                        myHeaders.append('X-BRAND-DATA', '1');
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", 'https://parimatch.co.tz/rest/customer/session/login', true);
+                        //Передает правильный заголовок в запросе
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.setRequestHeader("X-BRAND-DATA", "1");
+                        var data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_number").val()}"}`;
+                        console.log(data,'data3');
+                        xhr.onreadystatechange = function() {//Вызывает функцию при смене состояния.
+                            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                                console.log(JSON.parse(this.response));
+                                console.log(xhr.getResponseHeader('X-ODDS-SESSION'));
+                                // Запрос завершен. Здесь можно обрабатывать результат.
                             }
-                        })
+                        }
+                        xhr.send(data);
+
+                        // $.ajax({
+                        //     type: "POST",
+                        //     url: "/site/login",
+                        //     cache : false,
+                        //     processData: false,
+                        //     dataType: 'json',
+                        //     contentType: false,
+                        //     data: formData,
+                        //     success: (msg) => {
+                        //         console.log(msg);
+                        //         if( msg.status == "ok" ) {
+                        //             // window.location.href = msg.data.href;
+                        //         } else {
+                        //
+                        //         }
+                        //     }
+                        // })
 
                     } else {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
