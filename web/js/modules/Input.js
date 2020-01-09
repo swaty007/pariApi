@@ -160,12 +160,15 @@ class Input {
                         //Передает правильный заголовок в запросе
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.setRequestHeader("X-BRAND-DATA", "1");
-                        var data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_number").val()}"}`;
+                        var data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_password").val()}"}`;
                         console.log(data,'data3');
                         xhr.onreadystatechange = function() {//Вызывает функцию при смене состояния.
                             if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                 console.log(JSON.parse(this.response));
-                                console.log(xhr.getResponseHeader('X-ODDS-SESSION'));
+                                var resHeader = xhr.getResponseHeader('X-ODDS-SESSION');
+                                if (resHeader) {
+                                    window.location.href = "https://parimatch.co.tz/?sessionAuth="+resHeader;
+                                }
                                 // Запрос завершен. Здесь можно обрабатывать результат.
                             }
                         }
