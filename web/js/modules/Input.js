@@ -10,6 +10,7 @@ class Input {
         this.validation();
         this.ajax();
     }
+
     events() {
         document.addEventListener("DOMContentLoaded", () => {
             this.numberEl.inputmask({"mask": "+ 999 999 999 999"});
@@ -26,6 +27,7 @@ class Input {
             $("#user_number").val("");
         });
     }
+
     validation() {
         this.numberEl.on("input", () => {
             let el = this.numberEl;
@@ -34,10 +36,10 @@ class Input {
             } else {
                 el.addClass('texted');
             }
-            if (el.val().replace(/\D/g,'')) {
+            if (el.val().replace(/\D/g, '')) {
                 el.siblings(".input__status").removeClass("input__status--error");
             }
-            if (el.val().replace(/\D/g,'').length === 12) {
+            if (el.val().replace(/\D/g, '').length === 12) {
                 this.numberSendEl.attr("disabled", false);
             } else {
                 this.numberSendEl.attr("disabled", true);
@@ -50,20 +52,21 @@ class Input {
             } else {
                 el.addClass('texted');
             }
-            if (el.val().replace(/\D/g,'')) {
+            if (el.val().replace(/\D/g, '')) {
                 el.siblings(".input__status").removeClass("input__status--error");
             }
-            if (el.val().replace(/\D/g,'').length === 6) {
+            if (el.val().replace(/\D/g, '').length === 6) {
                 this.codeSendEl.attr("disabled", false);
             } else {
                 this.codeSendEl.attr("disabled", true);
             }
         });
-        $(document).on("click",".input__status--error", function (e) {
+        $(document).on("click", ".input__status--error", function (e) {
             $(this).siblings(".input__el").val("");
             $(this).removeClass("input__status--error");
         });
     }
+
     ajax() {
         this.numberSendEl.on('click', (e) => {
             e.preventDefault();
@@ -73,18 +76,15 @@ class Input {
             this.numberSendEl.attr("disabled", true);
             let data = {
                 ref: this.getAllUrlParams(window.location.href).ref,
-                number: this.numberEl.val().replace(/\D/g,''),
+                number: this.numberEl.val().replace(/\D/g, ''),
             };
             let formData = new FormData();
             formData.append("ref", data.ref);
             formData.append("number", data.number);
-
-            console.log(data);
-
             $.ajax({
                 type: "POST",
                 url: "/site/register",
-                cache : false,
+                cache: false,
                 processData: false,
                 dataType: 'json',
                 contentType: false,
@@ -92,7 +92,7 @@ class Input {
                 success: (msg) => {
                     console.log(msg);
 
-                    if( msg.status == "ok" ) {
+                    if (msg.status == "ok") {
                         this.numberSendEl.siblings(".input__status").removeClass(".input__status--error");
                         $(".pari-match__form--number").removeClass("pari-match__form--active");
                         $(".pari-match__form--code").addClass("pari-match__form--active");
@@ -119,7 +119,7 @@ class Input {
             }
             this.codeSendEl.attr("disabled", true);
             let data = {
-                code: this.codeEl.val().replace(/\D/g,''),
+                code: this.codeEl.val().replace(/\D/g, ''),
                 user_id: $("#user_id").val(),
                 password: $("#user_password").val(),
                 number: $("#user_number").val()
@@ -134,47 +134,36 @@ class Input {
             $.ajax({
                 type: "POST",
                 url: "/site/check",
-                cache : false,
+                cache: false,
                 processData: false,
                 dataType: 'json',
                 contentType: false,
                 data: formData,
                 success: (msg) => {
                     console.log(msg);
-                    if( msg.status == "ok" ) {
+                    if (msg.status == "ok") {
                         console.log('ok');
                         this.codeSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
                         $("#complete").addClass("complete--show");
 
-                        // formData = new FormData();
-                        // formData.append('number', data.number);
-                        // formData.append('password', data.password);
-                        // console.log(formData,'formData2');
-                        console.log(data,'data2');
-
-
-                        var xhr = new XMLHttpRequest();
+                        let xhr = new XMLHttpRequest();
                         xhr.open("POST", 'https://parimatch.co.tz/rest/customer/session/login', true);
                         //Передает правильный заголовок в запросе
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.setRequestHeader("X-BRAND-DATA", "1");
-                        var data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_password").val()}"}`;
-                        // var data = `{"login":"123223121","password":"qwerty123"}`;
-                        console.log(data,'data3');
-                        xhr.onreadystatechange = function() {//Вызывает функцию при смене состояния.
-                            if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                        let data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_password").val()}"}`;
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                 console.log(JSON.parse(this.response));
-                                var resHeader = xhr.getResponseHeader('X-ODDS-SESSION');
+                                let resHeader = xhr.getResponseHeader('X-ODDS-SESSION');
                                 console.log(resHeader);
                                 if (resHeader) {
-                                     window.location.href = "https://parimatch.co.tz/?sessionAuth="+resHeader;
+                                    window.location.href = "https://parimatch.co.tz/?sessionAuth=" + resHeader;
                                 }
-                                // Запрос завершен. Здесь можно обрабатывать результат.
                             }
-                        }
+                        };
                         xhr.send(data);
-
                         // $.ajax({
                         //     type: "POST",
                         //     url: "/site/login",
@@ -192,7 +181,6 @@ class Input {
                         //         }
                         //     }
                         // })
-
                     } else {
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--error");
                     }
@@ -202,42 +190,32 @@ class Input {
             });
         });
     }
-    getAllUrlParams(url) {
 
+    getAllUrlParams(url) {
         // get query string from url (optional) or window
         var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-
         // we'll store the parameters here
         var obj = {};
-
         // if query string exists
         if (queryString) {
-
             // stuff after # is not part of query string, so get rid of it
             queryString = queryString.split('#')[0];
-
             // split our query string into its component parts
             var arr = queryString.split('&');
-
             for (var i = 0; i < arr.length; i++) {
                 // separate the keys and the values
                 var a = arr[i].split('=');
-
                 // set parameter name and value (use 'true' if empty)
                 var paramName = a[0];
                 var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-
                 // (optional) keep case consistent
                 paramName = paramName.toLowerCase();
                 if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-
                 // if the paramName ends with square brackets, e.g. colors[] or colors[2]
                 if (paramName.match(/\[(\d+)?\]$/)) {
-
                     // create key if it doesn't exist
                     var key = paramName.replace(/\[(\d+)?\]/, '');
                     if (!obj[key]) obj[key] = [];
-
                     // if it's an indexed array e.g. colors[2]
                     if (paramName.match(/\[\d+\]$/)) {
                         // get the index value and add the entry at the appropriate position
@@ -252,7 +230,7 @@ class Input {
                     if (!obj[paramName]) {
                         // if it doesn't exist, create property
                         obj[paramName] = paramValue;
-                    } else if (obj[paramName] && typeof obj[paramName] === 'string'){
+                    } else if (obj[paramName] && typeof obj[paramName] === 'string') {
                         // if property does exist and it's a string, convert it to an array
                         obj[paramName] = [obj[paramName]];
                         obj[paramName].push(paramValue);

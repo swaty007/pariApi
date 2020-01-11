@@ -59,7 +59,7 @@ use yii\helpers\Html; ?>
                     <input id="user_password" type="hidden" value="<?= $user_data['password']; ?>">
                     <input id="user_number" type="hidden" value="<?= $user_data['number']; ?>">
                     <p class="input__error">
-                        You entered an verification code.user_id
+                        You entered wrong verification code
                     </p>
                 </div>
                 <button id="step_back" class="pari-btn pari-btn--back" >

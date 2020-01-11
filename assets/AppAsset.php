@@ -20,8 +20,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/style.css',
+        'css/style.min.css',
     ];
     public $js = [
         'js/modules/jquery.inputmask.min.js',
