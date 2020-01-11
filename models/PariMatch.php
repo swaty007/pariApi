@@ -31,8 +31,13 @@ class PariMatch extends Model
             "receiveSms" =>  $number, // поле ввода
             "verificationType" =>  1
         );
+        $unique = $this->apiCall('https://parimatch.co.tz/rest/customer/account/is-value-unique/mobile/'.$number, null);
+        if ($unique['data']) {
+            return $this->apiCall('https://parimatch.co.tz/rest/customer/account/register', $data);
+        } else {
+            return false;
+        }
 
-        return $this->apiCall('https://parimatch.co.tz/rest/customer/account/register', $data);
     }
 
     public function checkCode ($code, $user_id, $password) {
@@ -93,7 +98,7 @@ class PariMatch extends Model
         return $this->apiCall('https://6dq4e.api.infobip.com/sms/1/text/single', $data, $headers);
     }
 
-    private function apiCall($url,$post_data = array(), $headers = null)
+    private function apiCall($url, $post_data = array(), $headers = null)
     {
         if ($headers === null) {
             $headers = array(
@@ -105,16 +110,20 @@ class PariMatch extends Model
         }
 
         // Create cURL handle and initialize (if needed)
-        if ($this->ch === null) {
+//        if ($this->ch === null) {
             $this->ch = curl_init($url);
             curl_setopt($this->ch, CURLOPT_FAILONERROR, true);
             curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($this->ch, CURLOPT_POST, true);
             curl_setopt($this->ch, CURLOPT_HEADER, true);
             curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
+//        }
+        if ($post_data !== null) {
+            curl_setopt($this->ch, CURLOPT_POST, true);
+            curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+        } else {
+            curl_setopt($this->ch, CURLOPT_HTTPGET, true);
         }
-        curl_setopt($this->ch, CURLOPT_POSTFIELDS, json_encode($post_data));
 
         $data = curl_exec($this->ch);
         $header_size = curl_getinfo($this->ch, CURLINFO_HEADER_SIZE);

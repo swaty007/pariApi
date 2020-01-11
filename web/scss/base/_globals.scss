@@ -34,7 +34,10 @@ img {
   }
   &--back {
     //display: none;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    border: none;
+    background: transparent;
+    color: $black!important;
   }
   @media(max-width: $md-width) {
     position: absolute;
@@ -67,7 +70,7 @@ img {
       left: 0;
       height: 48px;
       //display: block;
-      margin-bottom: 0;
+      margin-top: 0;
     }
   }
   &:hover {

@@ -13,7 +13,7 @@ class Input {
 
     events() {
         document.addEventListener("DOMContentLoaded", () => {
-            this.numberEl.inputmask({"mask": "+ 999 999 999 999"});
+            this.numberEl.inputmask({"mask": "+ 255 999 999 999"});
             this.codeEl.inputmask({"mask": "9 9 9 9 9 9"});
             this.numberSendEl.attr("disabled", true);
             this.codeSendEl.attr("disabled", true);
@@ -90,8 +90,7 @@ class Input {
                 contentType: false,
                 data: formData,
                 success: (msg) => {
-                    console.log(msg);
-
+                    // console.log(msg);
                     if (msg.status == "ok") {
                         this.numberSendEl.siblings(".input__status").removeClass(".input__status--error");
                         $(".pari-match__form--number").removeClass("pari-match__form--active");
@@ -129,8 +128,7 @@ class Input {
             formData.append("user_id", data.user_id);
             formData.append("password", data.password);
             formData.append("number", data.number);
-            console.log(formData, 'formData1');
-            console.log(data, 'data1');
+            // console.log(data, 'data1');
             $.ajax({
                 type: "POST",
                 url: "/site/check",
@@ -140,9 +138,8 @@ class Input {
                 contentType: false,
                 data: formData,
                 success: (msg) => {
-                    console.log(msg);
+                    // console.log(msg);
                     if (msg.status == "ok") {
-                        console.log('ok');
                         this.codeSendEl.siblings(".input").find(".input__status").removeClass("input__status--error");
                         this.codeSendEl.siblings(".input").find(".input__status").addClass("input__status--success");
                         $("#complete").addClass("complete--show");
@@ -155,9 +152,9 @@ class Input {
                         let data = `{"login":"${$("#user_number").val().substr(3)}","password":"${$("#user_password").val()}"}`;
                         xhr.onreadystatechange = function () {
                             if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                                console.log(JSON.parse(this.response));
+                                // console.log(JSON.parse(this.response));
                                 let resHeader = xhr.getResponseHeader('X-ODDS-SESSION');
-                                console.log(resHeader);
+                                // console.log(resHeader);
                                 if (resHeader) {
                                     window.location.href = "https://parimatch.co.tz/?sessionAuth=" + resHeader;
                                 }

@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=swaty.mysql.tools;dbname=swaty_dat',
-    'username' => 'swaty_dat',
-    'password' => 'm&Vb46h7K~',
+    'dsn' => 'mysql:host=;dbname=',
+    'username' => '',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

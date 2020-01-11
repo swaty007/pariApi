@@ -121,6 +121,8 @@ class SiteController extends Controller
                     'data' => $res
                 ];
             }
+        } else {
+            $this->redirect('/');
         }
     }
     public function actionCheck () {
@@ -131,16 +133,8 @@ class SiteController extends Controller
             $user_id = (int)Yii::$app->request->post('user_id', '');
             $password = (string)Yii::$app->request->post('password', '');
             $number = (int)Yii::$app->request->post('number', '');
-//            return [
-//                'status' => "ok",
-//                'data' => ''
-//            ];
-//            echo $code.'    ';
-//            echo $user_id.'    ';
-//            echo $password.'    ';
-//            echo $number;
 
-            if (empty($code) || empty($user_id) || empty($number) || empty($password) ) {//|| strlen($number) !== 12 || strlen($password) !== 7
+            if (empty($code) || empty($user_id) || empty($number) || empty($password) || strlen($number) !== 12 || strlen($password) !== 7) {
                 return [
                     'status' => "fail"
                 ];
@@ -164,6 +158,8 @@ class SiteController extends Controller
                     'data' => $res
                 ];
             }
+        } else {
+            $this->redirect('/');
         }
     }
 

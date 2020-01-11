@@ -41,7 +41,8 @@ use yii\helpers\Html; ?>
                     <div class="input__status"></div>
                     <input id="number_mask" type="tel" class="input__el input__el--tel" />
                     <p class="input__error">
-                        You entered an phone number.
+                        This number is already registered!
+                        <a href="https://parimatch.co.tz/password-reset">Forgot your password?</a>
                     </p>
                 </div>
 
@@ -62,10 +63,10 @@ use yii\helpers\Html; ?>
                         You entered wrong verification code
                     </p>
                 </div>
+                <button id="code_send" class="pari-btn pari-btn--code" disabled>LOG IN</button>
                 <button id="step_back" class="pari-btn pari-btn--back" >
                     BACK
                 </button>
-                <button id="code_send" class="pari-btn pari-btn--code" disabled>LOG IN</button>
             </div>
         </div>
 

@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/style.min.css',
+//        'css/style.css',
     ];
     public $js = [
         'js/modules/jquery.inputmask.min.js',
